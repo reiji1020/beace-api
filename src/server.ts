@@ -1,22 +1,32 @@
 import express, { Request, Response } from 'express';
+import Database from './db';
+import dotenv from 'dotenv';
+
+// .env ファイルを読み込む
+dotenv.config();
 
 const app = express();
 const port = 3000;
 
-// ミドルウェア
-app.use(express.json());
+// DB接続インスタンス作成
+const db = new Database();
 
-// サンプルエンドポイント
+// サーバー起動時にDB接続
+db.connect().catch(err => {
+    console.error('DB接続に失敗しました。', err);
+    process.exit(1);  // DB接続に失敗したらサーバーを終了
+});
+
 app.get('/', (req: Request, res: Response) => {
     res.send('Hello World');
 });
 
-// もう一つのエンドポイント
-app.get('/api/data', (req: Request, res: Response) => {
-    res.json({ message: 'This is some data' });
-});
-
-// サーバー起動
+// サーバー終了時にDB切断
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
+});
+
+process.on('SIGINT', () => {
+    db.end().catch(err => console.error('DB切断に失敗しました。', err));
+    process.exit();
 });
