@@ -2,8 +2,10 @@
 
 手芸道具管理用サイト「Beace」のBE APIサーバーのコードです。
 
-FEはこっち
+## FEクライアントリポジトリ
 
 https://github.com/reiji1020/beace
 
-API仕様はgithub pagesから
+## APIレスポンス仕様
+
+https://reiji1020.github.io/beace-api/swagger/
