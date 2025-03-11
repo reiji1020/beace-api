@@ -1,0 +1,159 @@
+openapi: 3.0.0
+info:
+  title: Beace API
+  description: 手芸道具管理サービスのAPI
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: ローカル開発環境
+
+paths:
+  /categories:
+    get:
+      summary: カテゴリー一覧取得
+      description: すべてのカテゴリーを取得し、キャメルケースで返す
+      operationId: getCategories
+      tags:
+        - Categories
+      responses:
+        "200":
+          description: カテゴリーの一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Category"
+        "500":
+          description: サーバーエラー
+
+  /tags:
+    get:
+      summary: タグ一覧取得
+      description: すべてのタグを取得し、キャメルケースで返す
+      operationId: getTags
+      tags:
+        - Tags
+      responses:
+        "200":
+          description: タグの一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Tag"
+        "500":
+          description: サーバーエラー
+
+  /tools:
+    get:
+      summary: 道具一覧取得
+      description: すべての道具を取得し、キャメルケースで返す
+      operationId: getTools
+      tags:
+        - Tools
+      responses:
+        "200":
+          description: 道具の一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Tool"
+        "500":
+          description: サーバーエラー
+
+components:
+  schemas:
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "ハサミ"
+        createdAt:
+          type: string
+          format: date-time
+          example: "2024-03-11T12:34:56.789Z"
+        updatedAt:
+          type: string
+          format: date-time
+          example: "2024-03-11T12:34:56.789Z"
+
+    Tag:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "切れ味鋭い"
+        createdAt:
+          type: string
+          format: date-time
+          example: "2024-03-11T12:34:56.789Z"
+        updatedAt:
+          type: string
+          format: date-time
+          example: "2024-03-11T12:34:56.789Z"
+
+    Tool:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "布切りばさみ"
+        modelNumber:
+          type: string
+          example: "SC-1234"
+        category:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+            name:
+              type: string
+              example: "ハサミ"
+        brand:
+          type: string
+          example: "クローバー"
+        purchaseDate:
+          type: string
+          format: date
+          example: "2024-03-01"
+        price:
+          type: number
+          format: float
+          example: 2500.00
+        quantity:
+          type: integer
+          example: 1
+        discontinued:
+          type: boolean
+          example: false
+        discontinuedDate:
+          type: string
+          format: date
+          nullable: true
+          example: null
+        note:
+          type: string
+          example: "切れ味が良い裁ちばさみ"
+        createdAt:
+          type: string
+          format: date-time
+          example: "2024-03-11T12:34:56.789Z"
+        updatedAt:
+          type: string
+          format: date-time
+          example: "2024-03-11T12:34:56.789Z"
