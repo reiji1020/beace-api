@@ -7,8 +7,8 @@ const app = express();
 app.use(express.json());
 
 // 📌 ルーティングを設定
-app.use("/tools", toolsRoutes);
-app.use("/categories", categoriesRoutes);
-app.use("/tags", tagsRoutes);
+app.use("/api/tools", toolsRoutes);
+app.use("/api/categories", categoriesRoutes);
+app.use("/api/tags", tagsRoutes);
 
 export default app;
